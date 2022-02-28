@@ -32,10 +32,13 @@ const displayPhone = (phones) => {
         console.log(phone)
 
         const div = document.createElement("div")
+        div.classList.add("card","h-100","px-3", "py-4","border-0","rounded-3", "shadow",)
+
         div.innerHTML = `
-            <img src=${phone.image}>
-            <h3>${phone.phone_name}</h3>
-            <h4>Brand: ${phone.brand}</h4>
+            <img width=200px class="mx-auto p-3" src=${phone.image}>
+            <h4>${phone.phone_name}</h4>
+            <h5>Brand: ${phone.brand}</h5>
+            <button class="btn bg-primary text-white fw-bold rounded-pill">Details</button>
         `
         phoneContainer.appendChild(div)
     })
