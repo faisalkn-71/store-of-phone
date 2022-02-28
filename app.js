@@ -13,9 +13,17 @@ loadPhone()
 
 const displayPhone = (phones) => {
     // console.log(phones)
-
+    const phoneContainer = document.getElementById("phone-container");
     phones.forEach(phone => {
         console.log(phone)
+
+        const div = document.createElement("div")
+        div.innerHTML = `
+            <img src=${phone.image}>
+            <h3>${phone.phone_name}</h3>
+            <h4>Brand: ${phone.brand}</h4>
+        `
+        phoneContainer.appendChild(div)
     })
 
 }
