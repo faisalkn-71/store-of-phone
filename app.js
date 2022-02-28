@@ -1,12 +1,24 @@
+// search phone
+
+const searchPhone = () => {
+    const searchText = document.getElementById("search-field").value;
+   
+    loadPhone(searchText);
+
+    // clear search field
+    document.getElementById("search-field").value = ""
+
+}
+
+
 // load phone
 
-const loadPhone = () => {
-    fetch(`https://openapi.programming-hero.com/api/phones?search=iphone`)
+const loadPhone = (searchText) => {
+    fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     .then(res => res.json())
     .then(info => displayPhone(info.data))
 }
 
-loadPhone()
 
 
 // display phone
@@ -14,6 +26,8 @@ loadPhone()
 const displayPhone = (phones) => {
     // console.log(phones)
     const phoneContainer = document.getElementById("phone-container");
+    phoneContainer.textContent = "";
+   
     phones.forEach(phone => {
         console.log(phone)
 
