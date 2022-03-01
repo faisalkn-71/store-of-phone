@@ -62,7 +62,7 @@ const displayPhone = (phones) => {
               <h5 class="card-title">${phone.phone_name}</h5>
               <p class="card-text">Brand: ${phone.brand}</p>
             </div>
-            <a onclick="loadPhoneDetails('${phone.slug}')" href="#phone-details" class="btn bg-primary text-white fw-bold rounded-pill">Details</a>
+            <a onclick="loadPhoneDetails('${phone.slug}')" href="#phone-details" class="btn bg-primary text-white fw-bold rounded-pill">Phone Details</a>
              
         `
         phoneContainer.appendChild(div)
@@ -82,11 +82,20 @@ const loadPhoneDetails = (id) => {
 // display phone details
 
 const displayPhoneDetails = (detail) => {
-    console.log(detail)
+    // console.log(detail)
+    // console.log(detail.mainFeatures.sensors)
 
     const detailsContainer = document.getElementById("phone-details");
     detailsContainer.textContent = ''
+
     
+    
+    const sensor = detail.mainFeatures.sensors
+    console.log( ...sensor);
+
+
+
+
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
@@ -100,6 +109,15 @@ const displayPhoneDetails = (detail) => {
       <p class="card-text">Storage: ${detail.mainFeatures.storage}</p>
       <p class="card-text">Memory: ${detail.mainFeatures.memory}</p>
       <p class="card-text">Chip set: ${detail.mainFeatures.chipSet}</p>
+      <p class="card-text"><h5>Sensors:</h5> ${sensor}</p>
+      
+      <div class="card-text"><h5>Others</h5>
+      <p>Bluetooth: ${detail.others.Bluetooth}</p>
+      <p>GPS: ${detail.others.GPS}</p>
+      <p>NFC: ${detail.others.NFC}</p>
+      <p>Radio: ${detail.others.Radio}</p>
+      <p>USB: ${detail.others.USB}</p>
+      <p>WLAN: ${detail.others.WLAN}</p>
     </div>
       
   </div>
