@@ -1,9 +1,17 @@
+// show spinner at the of loading
+const toggleSpinner = displayStyle => {
+   document.getElementById("spinner").style.display = displayStyle;
+}
+
+
 // search phone
 
 const searchPhone = () => {
     const searchText = document.getElementById("search-field").value;
+   
+// call the toggleSpinner
+    toggleSpinner("block");
     
-    // call the toggleSpinner
     loadPhone(searchText);
 
     // clear search field
@@ -18,18 +26,24 @@ const loadPhone = (searchText) => {
     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     .then(res => res.json())
     .then(info => {
+        
         if(info.status == true){
             displayPhone(info.data)
         }
+        
         else{
             // clear phone container
             const phoneContainer = document.getElementById("phone-container");
             phoneContainer.textContent = "";
 
+            // clear phone details section
             const detailsContainer = document.getElementById("phone-details");
             detailsContainer.textContent = ''
 
-         const errorMag = document.getElementById("error").innerText = "Oops!! No Result Found"
+            const errorMag = document.getElementById("error").innerText = "Oops!! No Result Found"
+
+            // stop the toggleSpinner
+            toggleSpinner("none")
          
         }
     })
@@ -40,13 +54,12 @@ const loadPhone = (searchText) => {
 // display phone
 
 const displayPhone = (phones) => {
-    console.log(phones)
 
     // clear error massage
-    document.getElementById("error").innerText = ''
+    document.getElementById("error").innerText = "";
     
     const detailsContainer = document.getElementById("phone-details");
-    detailsContainer.textContent = ''
+    detailsContainer.textContent = "";
 
     // phone container section
     const phoneContainer = document.getElementById("phone-container");
@@ -54,18 +67,14 @@ const displayPhone = (phones) => {
     
     // show 20 phones in display
     const showPhones = phones.slice(0, 20);
-    // console.log(showPhones)
     
     showPhones.forEach(phone => {
-        // console.log(phone)
 
 
         // innerHTML div for phone
         const div = document.createElement("div")
         div.classList.add("col")
-
         div.innerHTML = `
-            
             <div class="card h-100 p-4 shadow">
             <img width=200px class="img-fluid mx-auto p-3" src=${phone.image}>
             <div class="card-body">
@@ -73,10 +82,13 @@ const displayPhone = (phones) => {
               <p class="card-text">Brand: ${phone.brand}</p>
             </div>
             <a onclick="loadPhoneDetails('${phone.slug}')" href="#phone-details" class="btn bg-primary text-white fw-bold rounded-pill">Details</a>
-             
         `
         phoneContainer.appendChild(div)
     })
+
+    // stop the toggleSpinner
+    toggleSpinner("none");
+
 
 }
 
@@ -90,22 +102,16 @@ const loadPhoneDetails = (id) => {
 }
 
 // display phone details
-
 const displayPhoneDetails = (detail) => {
-    // console.log(detail)
-    // console.log(detail.mainFeatures.sensors)
-
+    
     // phone details section
     const detailsContainer = document.getElementById("phone-details");
     detailsContainer.textContent = ''
 
-    
     // phone sensors
     const sensor = detail.mainFeatures.sensors
-    // console.log( ...sensor);
 
     // innerHTML div for phone details
-
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
