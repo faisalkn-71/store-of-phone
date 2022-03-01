@@ -1,4 +1,4 @@
-// show spinner at the of loading
+// show spinner at the time of loading
 const toggleSpinner = displayStyle => {
    document.getElementById("spinner").style.display = displayStyle;
 }
