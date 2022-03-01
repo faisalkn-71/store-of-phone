@@ -26,6 +26,9 @@ const loadPhone = (searchText) => {
             const phoneContainer = document.getElementById("phone-container");
             phoneContainer.textContent = "";
 
+            const detailsContainer = document.getElementById("phone-details");
+            detailsContainer.textContent = ''
+
          const errorMag = document.getElementById("error").innerText = "Oops!! No Result Found"
          
         }
@@ -59,8 +62,8 @@ const displayPhone = (phones) => {
               <h5 class="card-title">${phone.phone_name}</h5>
               <p class="card-text">Brand: ${phone.brand}</p>
             </div>
-              <button onclick="loadPhoneDetails('${phone.slug}')" class="btn bg-primary text-white fw-bold rounded-pill">Details</button>
-          </div>
+            <a onclick="loadPhoneDetails('${phone.slug}')" href="#phone-details" class="btn bg-primary text-white fw-bold rounded-pill">Details</a>
+             
         `
         phoneContainer.appendChild(div)
     })
@@ -82,16 +85,21 @@ const displayPhoneDetails = (detail) => {
     console.log(detail)
 
     const detailsContainer = document.getElementById("phone-details");
+    detailsContainer.textContent = ''
     
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
     <div class="card h-100 p-4 shadow">
-    <img width=200px class="mx-auto p-3" src=${detail.image}>
+    <img width=300px class="mx-auto p-3" src=${detail.image}>
     <div class="card-body">
       <h5 class="card-title">${detail.name}</h5>
       <p class="card-text">Brand: ${detail.brand}</p>
       <p class="card-text">${detail.releaseDate ? detail.releaseDate : "Release Date: Unknown"}</p>
+      <p class="card-text">Display Size: ${detail.mainFeatures.displaySize}</p>
+      <p class="card-text">Storage: ${detail.mainFeatures.storage}</p>
+      <p class="card-text">Memory: ${detail.mainFeatures.memory}</p>
+      <p class="card-text">Chip set: ${detail.mainFeatures.chipSet}</p>
     </div>
       
   </div>
