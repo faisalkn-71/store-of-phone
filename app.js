@@ -1,4 +1,3 @@
-
 // search phone
 
 const searchPhone = () => {
@@ -18,7 +17,19 @@ const searchPhone = () => {
 const loadPhone = (searchText) => {
     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     .then(res => res.json())
-    .then(info => displayPhone(info.data))
+    .then(info => {
+        if(info.status == true){
+            displayPhone(info.data)
+        }
+        else{
+            // clear phone container
+            const phoneContainer = document.getElementById("phone-container");
+            phoneContainer.textContent = "";
+
+         const errorMag = document.getElementById("error").innerText = "Oops!! No Result Found"
+         
+        }
+    })
 }
 
 
@@ -26,15 +37,20 @@ const loadPhone = (searchText) => {
 // display phone
 
 const displayPhone = (phones) => {
-    // console.log(phones)
+    console.log(phones)
+    // clear error massage
+    document.getElementById("error").innerText = ''
+    
     const phoneContainer = document.getElementById("phone-container");
     phoneContainer.textContent = "";
-    if(!phones){
-        document.getElementById("no-result").style.display = "d-block"
-    }
+    
+    // if(phones = 0){
+    //     document.getElementById("error").style.display = "d-block"
+    // }
+   
    
     phones.forEach(phone => {
-        console.log(phone)
+        // console.log(phone)
 
         const div = document.createElement("div")
         div.classList.add("col")
@@ -55,3 +71,14 @@ const displayPhone = (phones) => {
     })
 
 }
+
+// load phone details
+
+// const loadPhoneDetails = (id) => {
+//     const url = `https://openapi.programming-hero.com/api/phone/${id}`
+//     fetch(url)
+//     .then(res => res.json())
+//     .then(data => console.log(data))
+// }
+
+
