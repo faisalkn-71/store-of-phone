@@ -1,8 +1,10 @@
+
 // search phone
 
 const searchPhone = () => {
     const searchText = document.getElementById("search-field").value;
-   
+    
+    // call the toggleSpinner
     loadPhone(searchText);
 
     // clear search field
@@ -27,18 +29,27 @@ const displayPhone = (phones) => {
     // console.log(phones)
     const phoneContainer = document.getElementById("phone-container");
     phoneContainer.textContent = "";
+    if(!phones){
+        document.getElementById("no-result").style.display = "d-block"
+    }
    
     phones.forEach(phone => {
         console.log(phone)
 
         const div = document.createElement("div")
-        div.classList.add("card","h-100","px-3", "py-4","border-0","rounded-3", "shadow",)
+        div.classList.add("col")
 
         div.innerHTML = `
+            
+
+            <div class="card h-100 p-4 shadow">
             <img width=200px class="mx-auto p-3" src=${phone.image}>
-            <h4>${phone.phone_name}</h4>
-            <h5>Brand: ${phone.brand}</h5>
-            <button class="btn bg-primary text-white fw-bold rounded-pill">Details</button>
+            <div class="card-body">
+              <h5 class="card-title">${phone.phone_name}</h5>
+              <p class="card-text">Brand: ${phone.brand}</p>
+            </div>
+              <button class="btn bg-primary text-white fw-bold rounded-pill">Details</button>
+          </div>
         `
         phoneContainer.appendChild(div)
     })
